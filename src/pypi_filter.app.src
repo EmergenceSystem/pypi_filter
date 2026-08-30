@@ -1,15 +1,25 @@
 {application, pypi_filter, [
     {description, "em_filter agent for PyPI Python package search"},
     {vsn, "0.1.0"},
-    {registered, []},
+    {registered, [pypi_filter_sup, pypi_filter_server]},
     {mod, {pypi_filter_app, []}},
     {applications, [
         kernel,
         stdlib,
+        ssl,
+        inets,
+        cowboy,
         em_filter
     ]},
-    {env, []},
-    {modules, []},
+    {env, [
+        {pop_port,   0},
+        {query_port, 0},
+        {pop_seeds,  []}
+    ]},
+    {modules, [
+        pypi_filter_sup,
+        pypi_filter_server
+    ]},
     {licenses, ["Apache-2.0"]},
     {links, [{"GitHub", "https://github.com/EmergenceSystem/pypi_filter"}]}
 ]}.
